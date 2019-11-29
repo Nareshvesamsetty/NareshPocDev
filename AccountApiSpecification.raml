@@ -1,0 +1,45 @@
+#%RAML 1.0
+version: 1
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/2c6d4737-3861-44f7-9184-cc751c66edb6/ # 
+
+title: Post Account Api Specifican
+
+documentation:
+  - !include  /exchange_modules/0fab3e98-94d6-4b41-b56d-b087371d2bdf/account-api-documentation/1.0.1/account-api-documentation.raml
+
+traits:
+  client-id-required: !include  exchange_modules/0fab3e98-94d6-4b41-b56d-b087371d2bdf/account-api-traits/1.0.0/account-api-traits.raml
+
+types: 
+  AccountDetails: !include  /exchange_modules/0fab3e98-94d6-4b41-b56d-b087371d2bdf/account-api-datatypes/1.0.6/account-api-datatypes.raml
+
+/accounts:
+  is: [client-id-required]
+
+  get:
+    description: this method retrives the following details of account end point
+    responses:
+      200:
+        body:
+          application/json:
+            type: AccountDetails[]
+            examples:
+              output: !include  /exchange_modules/0fab3e98-94d6-4b41-b56d-b087371d2bdf/account-api-examples/1.0.10/account-api-examples.raml
+
+  
+  post:
+    description: this method insert the following values into account end point
+    responses: 
+      201:
+        body: 
+          application/json:
+            example: 
+              message: Account details inserted from query parameters
+  
+  put:
+    description: this method update the following values into account end point
+    responses: 
+      200:
+        body: 
+          application/json:
+            
